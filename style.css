@@ -1,5 +1,5 @@
 body {
-	background-image: url("img/blur-board-game.jpg");
+	background-image: url("img/board-game-challenge-chess.jpg");
 	background-repeat: no-repeat;
   	background-position: center;
   	background-size: cover;
@@ -15,7 +15,7 @@ body {
 }
 
 .rules {
-  	background-color: rgba(255, 255, 255, 0.4);
+  	background-color: rgba(255, 255, 255, 0.8);
   	color: black;
   	padding-left: 3%;
   	padding-right: 3%;
@@ -36,3 +36,67 @@ body {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.entry{
+	margin-top: 35px;
+	display: flex;
+}
+
+.guess {
+  	text-align: center;
+  	margin-right: 15%;
+  	margin-left: 25%;
+  	margin-top: 10%;
+  	margin-bottom: 5%;
+  	padding-top: 10px;
+  	padding-bottom: 10px;
+  	border-radius: 10px;
+  	background-color: rgb(255, 255, 255, 0.8);
+}
+
+.hint_title {
+	font-size: 20px;
+}
+
+.hints{
+	background-color: rgb(255, 255, 255, 0.8);
+	padding: 5%;
+	margin-right: 25%;
+	margin-left: 5%;
+	border-radius: 10px;
+}
+
+.column {
+	flex: 50%;
+}
+.guess_btn {
+	text-align: center;
+	border-radius: 5px;
+	font-size: 25px;
+	background-color: rgb(0, 153, 255);
+	color: white;
+	margin-top: 5%;
+	padding: 5px;
+
+}
+
+
+input{
+	border: 2px solid rgba(251, 86, 111);
+	font-size: 40px;
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border-radius: 10px;
+}
+
+.hint_list {
+	font-size: 20px;
+	line-height: 130%;
+	letter-spacing: 3px;
+}
+

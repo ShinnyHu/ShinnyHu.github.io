@@ -10,7 +10,6 @@ var InputController = (function() {
 	        	var inputClass = inputGuess + i;
 	        	guess.push(parseFloat(document.querySelector(inputClass).value));
 	        }
-	        console.log(guess);
 	        return guess;
 	        
 		},
@@ -123,7 +122,6 @@ var controller = (function(InputCtrl, UICtrl) {
 	var DOM = UICtrl.getDOMstrings();
 	var times = 0;
 	var answer;
-	var valid = -4;
 
 	var setupEventListeners = function() {
         for (var i = 1; i <= 4; i++) {
@@ -131,9 +129,7 @@ var controller = (function(InputCtrl, UICtrl) {
         	document.querySelector(inputClass).addEventListener('input', ctrlInputGuess);
         	document.querySelector(inputClass).disabled = false;  
         } 
-        // if(valid === 0) {
-        	document.querySelector(DOM.guessBtn).addEventListener('click', displayHint);
-        // }     
+        document.querySelector(DOM.guessBtn).addEventListener('click', displayHint);    
     };
 
     var ctrlInputGuess = function(e) {
@@ -141,21 +137,47 @@ var controller = (function(InputCtrl, UICtrl) {
     	var input = parseFloat(query.value);
     	if(!input || input <= 0 || input > 9) {
     		query.classList.remove('validInput');
-    		valid = (valid === -4) ? valid : valid - 1;
     	} else {
     		query.classList.add('validInput');
-    		valid += 1;
     	}
-    	console.log(valid);
-    	
+    }
+
+    var checkInput = function() {
+    	for (var i = 1; i <= 4; i++) {
+        	var inputClass = DOM.inputGuess + i;
+        	if(!document.querySelector(inputClass).classList.contains('validInput')) {
+        		return false;
+        	}  
+        }
+        return true;
+    }
+
+    var checkDuplicate = function(guess) {
+    	var set = new Set();
+    	for (var i = 1; i <= 4; i++) {
+        	var inputClass = DOM.inputGuess + i;
+        	var input = parseFloat(document.querySelector(inputClass).value);
+        	if(set.has(input)) {
+        		return false;
+        	}
+        	set.add(input);
+        }
+        return true;
     }
 
     var displayHint = function(e) {
+    	if(!checkInput()) {
+    		alert('Please enter valid number!');
+    		return;
+    	}
     	var guess = InputCtrl.getInput(DOM.inputGuess);
+    	if(!checkDuplicate(guess)) {
+    		alert('The number has to be distinct!');
+    		return;
+    	}
     	UICtrl.clearInput(DOM.inputGuess);
     	var hint = InputCtrl.produceHint();
     	times += 1;
-    	console.log(times);
     	if(UICtrl.printHint(hint, guess, times, answer)) {
     		document.querySelector(DOM.guessBtn).removeEventListener('click', displayHint);
     		for (var i = 1; i <= 4; i++) {
